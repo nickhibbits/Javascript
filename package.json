@@ -1,0 +1,19 @@
+{
+  "name": "dinosaur-oop",
+  "version": "1.0.0",
+  "description": "## Student Instructions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickhibbits/dinosaur-oop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickhibbits/dinosaur-oop/issues"
+  },
+  "homepage": "https://github.com/nickhibbits/dinosaur-oop#readme"
+}
