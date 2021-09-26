@@ -30,3 +30,16 @@
 
 
 // On button click, prepare and display infographic
+
+
+let form = document.querySelector("#dino-compare");
+let grid = document.querySelector("#grid");
+
+function onClick (event) {
+    event.preventDefault();
+    console.log("click");
+    form.style = "display: none";
+    grid.style = "display: grid";
+}
+
+export { onClick }
