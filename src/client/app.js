@@ -1,12 +1,21 @@
+import { DiagnosticCategory } from "typescript";
 
     // Create Dino Constructor
-
+    function Dino(species, weight, height, diet, where, when, fact) {
+        this.species = species,
+        this.weight = weight,
+        this.height = height,
+        this.diet = diet,
+        this.where = where,
+        this.when = when,
+        this.fact = fact
+    }
 
     // Create Dino Objects
-
+    
 
     // Create Human Object
-
+    
     // Use IIFE to get human data from form
 
 
@@ -37,7 +46,7 @@ let grid = document.querySelector("#grid");
 
 function onClick (event) {
     event.preventDefault();
-    console.log("click");
+
     form.style = "display: none";
     grid.style = "display: grid";
 }
