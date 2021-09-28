@@ -49,14 +49,10 @@ function Human(name, feet, inches, weight, diet) {
     this.diet = diet
 }
 
-// Generate Tiles for each Dino in Array
-
-// Add tiles to DOM
+// Add tiles to DOM... with function?
 function addTiles() {
     console.log("add tiles")
 }
-// Remove form from screen
-// On button click, prepare and display infographic
 
 function onClick (event) {
     event.preventDefault();
@@ -64,7 +60,9 @@ function onClick (event) {
     // Use IIFE (??) to get human data from form
     let user = new Human(nameField.value, feetField.value, inchesField.value, weightField.value, dietField.value)
 
-    addTiles()
+    //Set user data to center tile -- Object.values(user)
+
+    //Set dino data to other squares
 
     console.log("user", user);
 
