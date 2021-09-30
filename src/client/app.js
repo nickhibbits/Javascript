@@ -65,12 +65,24 @@ function onClick (event) {
     // **Needs DRY code**
     // use a loop index to set the id of each square "dino-one, dino-two, etc"
     let dinoBlock = document.createElement("section");
-    dinoBlock.className = ("grid-item")
+    dinoBlock.classList.add("grid-item");
     grid.appendChild(dinoBlock);
 
 
     // dynamically create human tile
     // set user data to center tile -- Object.values(user)
+    let humanBlock = document.createElement("section");
+    for (let i = 0; i < user.length(); i++) {
+        let blockField = document.createElement("div")
+        blockField.classList.add(`human${i}`);
+
+        let fact = user[i]
+        
+        humanBlock.appendChild(blockField);
+    }
+
+    humanBlock.classList.add("grid-item");
+    grid.appendChild(humanBlock);
 
     //dynamically create pigeon tile
 
