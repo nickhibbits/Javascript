@@ -21,7 +21,8 @@ function Dino(species, weight, height, diet, where, when, fact) {
         this.fact = fact
 }
 
-// Create Dino Objects -- use loop
+// Create Dino Objects
+// **Needs DRY code** -- use loop
 let triceratops = new Dino(dino[0].species, dino[0].weight, dino[0].height, dino[0].diet, dino[0].where, dino[0].when, dino[0].fact)
 let tRex = new Dino(dino[1].species, dino[1].weight, dino[1].height, dino[1].diet, dino[1].where, dino[1].when, dino[1].fact)
 let anklyosaurus = new Dino(dino[2].species, dino[2].weight, dino[2].height, dino[2].diet, dino[2].where, dino[2].when, dino[2].fact)
@@ -58,11 +59,20 @@ function onClick (event) {
     event.preventDefault();
 
     // Use IIFE (??) to get human data from form
-    let user = new Human(nameField.value, feetField.value, inchesField.value, weightField.value, dietField.value)
+    let user = new Human(nameField.value, feetField.value, inchesField.value, weightField.value, dietField.value);
 
-    //Set user data to center tile -- Object.values(user)
+    // dynamically create dino tiles
+    // **Needs DRY code**
+    // use a loop index to set the id of each square "dino-one, dino-two, etc"
+    let dinoBlock = document.createElement("section");
+    dinoBlock.className = ("grid-item")
+    grid.appendChild(dinoBlock);
 
-    //Set dino data to other squares
+
+    // dynamically create human tile
+    // set user data to center tile -- Object.values(user)
+
+    //dynamically create pigeon tile
 
     console.log("user", user);
 
