@@ -24,6 +24,11 @@ function Dino(species, weight, height, diet, where, when, fact) {
 
 // Create Dino Objects
 // **Needs DRY code** -- use loop to create an array "dinoSet", that you can call in the loop to create dino squares
+
+let dinoSet = dino.map((element, i, array) => {
+  new Dino(dino[i].species, dino[i].weight, dino[i].height, dino[i].diet, dino[i].where, dino[i].when, dino[i].fact)
+})
+
 let triceratops = new Dino(dino[0].species, dino[0].weight, dino[0].height, dino[0].diet, dino[0].where, dino[0].when, dino[0].fact)
 let tRex = new Dino(dino[1].species, dino[1].weight, dino[1].height, dino[1].diet, dino[1].where, dino[1].when, dino[1].fact)
 let anklyosaurus = new Dino(dino[2].species, dino[2].weight, dino[2].height, dino[2].diet, dino[2].where, dino[2].when, dino[2].fact)
