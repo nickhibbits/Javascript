@@ -29,14 +29,14 @@ let dinoSet = dino.map((element, i, array) => {
   new Dino(dino[i].species, dino[i].weight, dino[i].height, dino[i].diet, dino[i].where, dino[i].when, dino[i].fact)
 })
 
-let triceratops = new Dino(dino[0].species, dino[0].weight, dino[0].height, dino[0].diet, dino[0].where, dino[0].when, dino[0].fact)
-let tRex = new Dino(dino[1].species, dino[1].weight, dino[1].height, dino[1].diet, dino[1].where, dino[1].when, dino[1].fact)
-let anklyosaurus = new Dino(dino[2].species, dino[2].weight, dino[2].height, dino[2].diet, dino[2].where, dino[2].when, dino[2].fact)
-let brachiosaurus = new Dino(dino[3].species, dino[3].weight, dino[3].height, dino[3].diet, dino[3].where, dino[3].when, dino[3].fact)
-let stegosaurus = new Dino(dino[4].species, dino[4].weight, dino[4].height, dino[4].diet, dino[4].where, dino[4].when, dino[4].fact)
-let elasmosaurus = new Dino(dino[5].species, dino[5].weight, dino[5].height, dino[5].diet, dino[5].where, dino[5].when, dino[5].fact)
-let pteranodon = new Dino(dino[6].species, dino[6].weight, dino[6].height, dino[6].diet, dino[6].where, dino[6].when, dino[6].fact)
-let pigeon = new Dino(dino[7].species, dino[7].weight, dino[7].height, dino[7].diet, dino[7].where, dino[7].when, dino[7].fact)
+// let triceratops = new Dino(dino[0].species, dino[0].weight, dino[0].height, dino[0].diet, dino[0].where, dino[0].when, dino[0].fact)
+// let tRex = new Dino(dino[1].species, dino[1].weight, dino[1].height, dino[1].diet, dino[1].where, dino[1].when, dino[1].fact)
+// let anklyosaurus = new Dino(dino[2].species, dino[2].weight, dino[2].height, dino[2].diet, dino[2].where, dino[2].when, dino[2].fact)
+// let brachiosaurus = new Dino(dino[3].species, dino[3].weight, dino[3].height, dino[3].diet, dino[3].where, dino[3].when, dino[3].fact)
+// let stegosaurus = new Dino(dino[4].species, dino[4].weight, dino[4].height, dino[4].diet, dino[4].where, dino[4].when, dino[4].fact)
+// let elasmosaurus = new Dino(dino[5].species, dino[5].weight, dino[5].height, dino[5].diet, dino[5].where, dino[5].when, dino[5].fact)
+// let pteranodon = new Dino(dino[6].species, dino[6].weight, dino[6].height, dino[6].diet, dino[6].where, dino[6].when, dino[6].fact)
+// let pigeon = new Dino(dino[7].species, dino[7].weight, dino[7].height, dino[7].diet, dino[7].where, dino[7].when, dino[7].fact)
 
 // Create Dino Compare Method 1
 Dino.prototype.compareWeight = () => {};
@@ -68,8 +68,6 @@ function onClick (event) {
   let user = new Human(nameField.value, feetField.value, inchesField.value, weightField.value, dietField.value);
 
   // dynamically create dino tiles
-  // **Needs DRY code**
-  // use a loop index to set the id of each square "dino-one, dino-two, etc"
   for (let i = 0; i < dinoSet.length; i++ ) {
     let dinoBlock = document.createElement("section");
     dinoBlock.classList.add("grid-item");
@@ -120,10 +118,10 @@ function onClick (event) {
     let blockField = document.createElement("div");
     blockField.setAttribute("id", `pigeon-fact-${i}`);
 
-    let userFacts = Object.values(user)
-    let userFact = userFacts[i]
+    let pigeonFacts = Object.values(dinoSet[7])
+    let pigeonFact = pigeonFacts[i]
 
-    blockField.innerHTML = userFact
+    blockField.innerHTML = pigeonFact
         
     pigeonBlock.appendChild(blockField);
   }
