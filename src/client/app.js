@@ -23,7 +23,6 @@ function Dino(species, weight, height, diet, where, when, fact) {
 }
 
 // Create Dino Objects
-// **Needs DRY code** -- use loop to create an array "dinoSet", that you can call in the loop to create dino squares
 let dinoSet = dino.map((e, i, a) => {
   return {
     newDino: new Dino(dino[i].species, dino[i].weight, dino[i].height, dino[i].diet, dino[i].where, dino[i].when, dino[i].fact), //
@@ -39,7 +38,7 @@ Dino.prototype.compareWeight = () => {};
 Dino.prototype.compareHeight = () => {};
 
 // Create Dino Compare Method 3
-Dino.prototype.compareDiet = () => {}
+Dino.prototype.compareDiet = () => {};
 
 // Create Human Object -- with constructor or with object literal?
 function Human(name, feet, inches, weight, diet) {
@@ -75,22 +74,24 @@ function onClick (event) {
   for (let i = 0; i < dinoSet.length; i++ ) {
     let dinoBlock = document.createElement("section");
     dinoBlock.classList.add("grid-item");
-    dinoBlock.setAttribute("id", `dino-${i}`)
+    dinoBlock.setAttribute("id", `dino-${i}`);
 
     //grab dino facts, create fields within block, populate fields with facts
     for (let x = 0; x < Object.keys(dinoSet[x]).length; x++) {
+      let list = document.createElement("ul")
       let field = document.createElement("div");
-      field.setAttribute("id", `dino-fact-${x}`)
+      field.setAttribute("id", `dino-fact-${x}`);
 
       dinoFacts = Object.values(dinoSet[x]);
       let dinoFact = dinoFacts[x];
-
       field.innerHTML = dinoFact;
 
-      dinoBlock.appendChild(field)
+      list.appendChild(field)
     }
 
+    dinoBlock.appendChild(list);
     grid.appendChild(dinoBlock);
+
   }
 
 
@@ -100,17 +101,18 @@ function onClick (event) {
   humanBlock.setAttribute("id", "human");
 
   for (let i = 0; i < Object.keys(human.user).length; i++) {
+    let humanList = document.createElement("ul");
     let blockField = document.createElement("div");
     blockField.setAttribute("id", `human-fact-${i}`);
 
-    let userFacts = Object.values(user)
-    let userFact = userFacts[i]
-
-    blockField.innerHTML = userFact
+    let userFacts = Object.values(user);
+    let userFact = userFacts[i];
+    blockField.innerHTML = userFact;
         
-    humanBlock.appendChild(blockField);
+    humanList.appendChild(blockField);
   }
-
+  
+  humanBlock.appendChild(humanList);
   grid.appendChild(humanBlock);
 
   //dynamically create pigeon tile
@@ -119,17 +121,19 @@ function onClick (event) {
   pigeonBlock.setAttribute("id", "pigeon");
 
   for (let i = 0; i < Object.keys(user).length; i++) {
-    let blockField = document.createElement("div");
-    blockField.setAttribute("id", `pigeon-fact-${i}`);
+    let pigeonList = document.createElement("ul");
+    let factField = document.createElement("div");
+    factField.setAttribute("id", `pigeon-fact-${i}`);
 
-    let pigeonFacts = Object.values(dinoSet[7])
-    let pigeonFact = pigeonFacts[i]
+    let pigeonFacts = Object.values(dinoSet[7]);
+    let pigeonFact = pigeonFacts[i];
+    factField.innerHTML = pigeonFact;
 
-    blockField.innerHTML = pigeonFact
+    pigeonList.appendChild(factField);
         
-    pigeonBlock.appendChild(blockField);
   }
-
+  
+  pigeonBlock.appendChild(factField);
   grid.appendChild(pigeonBlock);
 
   form.style = "display: none";
