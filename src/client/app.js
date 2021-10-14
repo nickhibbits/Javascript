@@ -12,13 +12,13 @@ let dietField = document.querySelector("#diet")
 
 // Create Dino Constructor
 function Dino(species, weight, height, diet, where, when, fact) {
-        this.species = species,
-        this.weight = weight,
-        this.height = height,
-        this.diet = diet,
-        this.where = where,
-        this.when = when,
-        this.fact = fact
+  this.species = species,
+    this.weight = weight,
+    this.height = height,
+    this.diet = diet,
+    this.where = where,
+    this.when = when,
+    this.fact = fact
 }
 
 // Create Dino Objects
@@ -28,22 +28,24 @@ let dinoSet = dino.Dinos.map((e, i) => {
   }
 })
 
+console.log("dinoSet", dinoSet);
+
 // Create Dino Compare Method 1
-Dino.prototype.compareWeight = () => {};
+Dino.prototype.compareWeight = () => { };
 
 // Create Dino Compare Method 2
-Dino.prototype.compareHeight = () => {};
+Dino.prototype.compareHeight = () => { };
 
 // Create Dino Compare Method 3
-Dino.prototype.compareDiet = () => {};
+Dino.prototype.compareDiet = () => { };
 
 // Create Human Object -- with constructor or with object literal?
 function Human(name, feet, inches, weight, diet) {
   this.name = name,
-  this.heightFeet = feet,
-  this.heightInches = inches,
-  this.weight = weight,
-  this.diet = diet
+    this.heightFeet = feet,
+    this.heightInches = inches,
+    this.weight = weight,
+    this.diet = diet
 }
 
 // Add tiles to DOM... with function?
@@ -51,35 +53,35 @@ function addTiles() {
   console.log("add tiles")
 }
 
-function onClick (event) {
+function onClick(event) {
   event.preventDefault();
 
   // Use IIFE to get human data from form
   let human = (function () {
     return {
       user: new Human(
-        nameField.value, 
-        feetField.value, 
-        inchesField.value, 
-        weightField.value, 
+        nameField.value,
+        feetField.value,
+        inchesField.value,
+        weightField.value,
         dietField.value
       )
     }
   }())
 
   // dynamically create dino tiles
-  for (let i = 0; i < dinoSet.length; i++ ) {
+  for (let i = 0; i < dinoSet.length - 1; i++) {
     let dinoBlock = document.createElement("section");
+    let list = document.createElement("ul")
     dinoBlock.classList.add("grid-item");
     dinoBlock.setAttribute("id", `dino-${i}`);
-    let list = document.createElement("ul")
 
     //grab dino facts, create fields within block, populate fields with facts
     for (let x = 0; x < Object.keys(dinoSet[x].newDino).length; x++) {
       let field = document.createElement("li");
       field.setAttribute("id", `dino-fact-${x}`);
 
-      let dinoFacts = Object.values(dinoSet[x].newDino);
+      let dinoFacts = Object.values(dinoSet[i].newDino);
       let dinoFact = dinoFacts[x];
       field.innerHTML = dinoFact;
 
@@ -90,9 +92,9 @@ function onClick (event) {
     grid.appendChild(dinoBlock);
 
     console.log("dinoBlock", dinoBlock);
-    
+
   }
-  
+
   // console.log("grid", grid);
 
   // dynamically create human tile
@@ -108,10 +110,10 @@ function onClick (event) {
     let userFacts = Object.values(human.user);
     let userFact = userFacts[i];
     blockField.innerHTML = userFact;
-        
+
     humanList.appendChild(blockField);
   }
-  
+
   humanBlock.appendChild(humanList);
   console.log("humanBlock", humanBlock);
 
@@ -122,7 +124,7 @@ function onClick (event) {
   let pigeonList = document.createElement("ul");
   pigeonBlock.classList.add("grid-item");
   pigeonBlock.setAttribute("id", "pigeon");
-  
+
   for (let i = 0; i < Object.keys(dinoSet[7].newDino).length; i++) {
     let factField = document.createElement("li");
     factField.setAttribute("id", `pigeon-fact-${i}`);
@@ -131,14 +133,14 @@ function onClick (event) {
     let pigeonFact = pigeonFacts[i];
     factField.innerHTML = pigeonFact;
 
-    pigeonList.appendChild(factField);      
+    pigeonList.appendChild(factField);
   }
-  
+
   pigeonBlock.appendChild(pigeonList);
   console.log("pigeonBlock", pigeonBlock);
   grid.appendChild(pigeonBlock);
 
-console.log("grid", grid);
+  console.log("grid", grid);
 
   form.style = "display: none";
   grid.style = "display: grid";
