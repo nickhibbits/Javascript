@@ -13,8 +13,8 @@ let dietField = document.querySelector("#diet")
 // Create Dino Constructor
 function Dino(species, weight, height, diet, where, when, fact) {
   this.species = species,
-    this.weight = weight,
-    this.height = height,
+    this.weight = `${weight} lbs`,
+    this.height = `${height} feet`,
     this.diet = diet,
     this.where = where,
     this.when = when,
