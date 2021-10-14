@@ -116,6 +116,7 @@ function onClick(event) {
 
   humanBlock.appendChild(humanList);
   console.log("humanBlock", humanBlock);
+  humanBlock.style.gridArea = "2 / 2 / 2 /2"
 
   grid.appendChild(humanBlock);
 
