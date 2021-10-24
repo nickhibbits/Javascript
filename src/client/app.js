@@ -92,15 +92,10 @@ function onClick(event) {
       let factField = document.createElement("li");
       let speciesImage = document.createElement("img")
 
-      speciesField.setAttribute("id", `dino-species-${i}`);
-      factField.setAttribute("id", `dino-fact-${i}`);
+      // speciesField.setAttribute("id", `dino-species-${i}`);
+      // factField.setAttribute("id", `dino-fact-${i}`);
 
       let species = dinoSet[i].newDino.species
-
-
-      // if (dinoSet[i].newDino.species == Triceratops) {
-      //   speciesImage.setAttribute("src", `../../images/triceratops`);
-      // } 
 
       switch (species) {
         case "Triceratops":
