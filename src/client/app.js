@@ -80,9 +80,7 @@ function onClick(event) {
     }
   }())
 
-  // dynamically create dino tiles
-  // use this function to create the pigeon tile, 
-
+  // dynamically create dino/pigeon tiles 
   function createDinoTiles() {
     for (let i = 0; i < dinoSet.length - 1; i++) {
       let block = document.createElement("section");
@@ -168,30 +166,34 @@ function onClick(event) {
     }
   }
 
-  createDinoTiles();
-
+  
   // dynamically create human tile
-  let humanBlock = document.createElement("section");
-  let humanList = document.createElement("ul");
-  humanBlock.classList.add("grid-item");
-  humanBlock.setAttribute("id", "human");
-
-  for (let i = 0; i < Object.keys(human.user).length; i++) {
-    let blockField = document.createElement("li");
-    blockField.setAttribute("id", `human-fact-${i}`);
-
-    let userFacts = Object.values(human.user);
-    let userFact = userFacts[i];
-    blockField.innerHTML = userFact;
-
-    humanList.appendChild(blockField);
+  function createHumanTile() {
+    let humanBlock = document.createElement("section");
+    let humanList = document.createElement("ul");
+    humanBlock.classList.add("grid-item");
+    humanBlock.setAttribute("id", "human");
+    
+    for (let i = 0; i < Object.keys(human.user).length; i++) {
+      let blockField = document.createElement("li");
+      blockField.setAttribute("id", `human-fact-${i}`);
+      
+      let userFacts = Object.values(human.user);
+      let userFact = userFacts[i];
+      blockField.innerHTML = userFact;
+      
+      humanList.appendChild(blockField);
+    }
+    
+    humanBlock.appendChild(humanList);
+    console.log("humanBlock", humanBlock);
+    humanBlock.style.gridArea = "2 / 2 / 2 / 2"
+    
+    grid.appendChild(humanBlock);
   }
 
-  humanBlock.appendChild(humanList);
-  console.log("humanBlock", humanBlock);
-  humanBlock.style.gridArea = "2 / 2 / 2 / 2"
-
-  grid.appendChild(humanBlock);
+  createDinoTiles();
+  createHumanTile();
 }
 
 export { onClick }
