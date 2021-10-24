@@ -14,11 +14,38 @@ let dietField = document.querySelector("#diet")
 function Dino(species, weight, height, diet, where, when, fact) {
   this.species = species,
     this.weight = `${weight} lbs`,
-    this.height = `${height} feet`,
+    this.height = `${height} feet`, // needs conversion for feet AND inches
     this.diet = diet,
     this.where = where,
     this.when = when,
     this.fact = fact
+}
+
+function FactSet(humanWeight, humanHeight, humanDiet, dinoLocation, dinoTimePeriod, dinoFact) {
+  this.humanWeight = humanWeight,
+  this.humanHeight = humanHeight, // needs conversion for feet AND inches
+  this.humanDiet = humanDiet
+  this.dinoLocation = dinoLocation,
+  this.dinoTimePeriod = dinoTimePeriod,
+  this.dinoFact = dinoFact
+  this.compareWeight = function () {
+    console.log("compareWeight")
+    //logic to compare human to dino weight
+    //different conditionals for different return values, if user input value is greater/less than dino values
+    return "this dino weighed x amount more than you"
+  }
+  this.compareHeight = function () {
+    console.log("compareHeight")
+    //logic to compare human to dino height
+    //different conditionals for different return values, if user input value is greater/less than dino values
+    return "this dino was x feet and inches taller than you"
+  }
+  this.compareDiet = function () {
+    console.log("compareDiet")
+    //logic to compare human to dino diet
+    //different conditionals for different return values, if user input value is different/the same than dino values
+    return "this dino ate the same diet as you"
+  }
 }
 
 // Create Dino Objects
@@ -28,17 +55,6 @@ let dinoSet = dino.Dinos.map((e, i) => {
   }
 })
 
-console.log("dinoSet", dinoSet);
-
-// Create Dino Compare Method 1
-Dino.prototype.compareWeight = () => { };
-
-// Create Dino Compare Method 2
-Dino.prototype.compareHeight = () => { };
-
-// Create Dino Compare Method 3
-Dino.prototype.compareDiet = () => { };
-
 // Create Human Object -- with constructor or with object literal?
 function Human(name, feet, inches, weight, diet) {
   this.name = name,
@@ -46,11 +62,6 @@ function Human(name, feet, inches, weight, diet) {
     this.heightInches = inches,
     this.weight = weight,
     this.diet = diet
-}
-
-// Add tiles to DOM... with function?
-function addTiles() {
-  console.log("add tiles")
 }
 
 function onClick(event) {
@@ -70,32 +81,94 @@ function onClick(event) {
   }())
 
   // dynamically create dino tiles
-  for (let i = 0; i < dinoSet.length - 1; i++) {
-    let dinoBlock = document.createElement("section");
-    let list = document.createElement("ul")
-    dinoBlock.classList.add("grid-item");
-    dinoBlock.setAttribute("id", `dino-${i}`);
+  // use this function to create the pigeon tile, 
 
-    //grab dino facts, create fields within block, populate fields with facts
-    for (let x = 0; x < Object.keys(dinoSet[x].newDino).length; x++) {
-      let field = document.createElement("li");
-      field.setAttribute("id", `dino-fact-${x}`);
+  function createDinoTiles() {
+    for (let i = 0; i < dinoSet.length - 1; i++) {
+      let block = document.createElement("section");
+      let list = document.createElement("ul")
+      block.classList.add("grid-item");
+      block.setAttribute("id", `dino-${i}`);
 
-      let dinoFacts = Object.values(dinoSet[i].newDino);
-      let dinoFact = dinoFacts[x];
-      field.innerHTML = dinoFact;
+      let speciesField = document.createElement("li");
+      let factField = document.createElement("li");
+      let speciesImage = document.createElement("img")
 
-      list.appendChild(field)
+      speciesField.setAttribute("id", `dino-species-${i}`);
+      factField.setAttribute("id", `dino-fact-${i}`);
+
+      let species = dinoSet[i].newDino.species
+
+
+      // if (dinoSet[i].newDino.species == Triceratops) {
+      //   speciesImage.setAttribute("src", `../../images/triceratops`);
+      // } 
+
+      switch (species) {
+        case "Triceratops":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/triceratops.png`);
+          break;
+        case "Tyrannosaurus Rex":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/tyrannosaurus-rex.png`);
+          break;
+        case "Anklyosaurus":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/anklyosaurus.png`);
+          break;
+        case "Brachiosaurus":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/brachiosaurus.png`);
+          break;
+        case "Stegosaurus":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/stegosaurus.png`);
+          break;
+        case "Elasmosaurus":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/elasmosaurus.png`);
+          break;
+        case "Pteranodon":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/pteranodon.png`);
+          break;
+        case "Pigeon":
+          speciesField.innerHTML = species;
+          speciesImage.setAttribute("src", `../../images/pigeon.png`);
+          break;
+      }
+
+      let dinoFacts = new FactSet(
+        human.user.weight, 
+        human.user.feet, 
+        human.user.diet, 
+        dinoSet[i].newDino.where,
+        dinoSet[i].newDino.when,
+        dinoSet[i].newDino.fact,
+      );
+
+      let randomNumber = Math.floor(Math.random() * 6) + 1;
+
+      let factArray = Object.values(dinoFacts)
+      let dinoFactsArray = factArray.splice(0, 3); // grab only dino facts and comparison methods
+      let fact = dinoFactsArray[randomNumber];
+      factField.innerHTML = fact;
+
+      //need logic for pigeon tile
+
+      const documentFragment = document.createDocumentFragment();
+      documentFragment.appendChild(list);
+      list.appendChild(speciesField);
+      list.appendChild(speciesImage);
+      list.appendChild(factField);
+
+      block.appendChild(list);
+      grid.appendChild(block);
     }
-
-    dinoBlock.appendChild(list);
-    grid.appendChild(dinoBlock);
-
-    console.log("dinoBlock", dinoBlock);
-
   }
 
-  // console.log("grid", grid);
+  createDinoTiles();
 
   // dynamically create human tile
   let humanBlock = document.createElement("section");
@@ -116,35 +189,9 @@ function onClick(event) {
 
   humanBlock.appendChild(humanList);
   console.log("humanBlock", humanBlock);
-  humanBlock.style.gridArea = "2 / 2 / 2 /2"
+  humanBlock.style.gridArea = "2 / 2 / 2 / 2"
 
   grid.appendChild(humanBlock);
-
-  //dynamically create pigeon tile
-  let pigeonBlock = document.createElement("section");
-  let pigeonList = document.createElement("ul");
-  pigeonBlock.classList.add("grid-item");
-  pigeonBlock.setAttribute("id", "pigeon");
-
-  for (let i = 0; i < Object.keys(dinoSet[7].newDino).length; i++) {
-    let factField = document.createElement("li");
-    factField.setAttribute("id", `pigeon-fact-${i}`);
-
-    let pigeonFacts = Object.values(dinoSet[7].newDino);
-    let pigeonFact = pigeonFacts[i];
-    factField.innerHTML = pigeonFact;
-
-    pigeonList.appendChild(factField);
-  }
-
-  pigeonBlock.appendChild(pigeonList);
-  console.log("pigeonBlock", pigeonBlock);
-  grid.appendChild(pigeonBlock);
-
-  console.log("grid", grid);
-
-  form.style = "display: none";
-  grid.style = "display: grid";
 }
 
 export { onClick }
