@@ -59,9 +59,8 @@ console.log("dinoSet", dinoSet)
 // Create Human Object -- with constructor or with object literal?
 function Human(name, feet, inches, weight, diet) {
   this.name = name,
-    this.heightFeet = feet,
-    this.heightInches = inches,
-    this.weight = weight,
+    this.height = `${feet} ft, ${inches} in`,
+    this.weight = `${weight} lbs`,
     this.diet = diet
 }
 
@@ -80,6 +79,8 @@ function onClick(event) {
       )
     }
   }())
+
+  console.log("human", human)
 
   // dynamically create dino/pigeon tiles 
   function createDinoTiles() {
@@ -146,10 +147,8 @@ function onClick(event) {
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
       let factArray = Object.values(dinoFacts);
-      console.log("factArray", factArray)
-      let filteredFactArray = factArray.splice(2, 7);
-      console.log("filteredFactArray", filteredFactArray);
-      let fact = filteredFactArray[randomNumber];
+      let filteredFacts = factArray.splice(2, 7);
+      let fact = filteredFacts[randomNumber];
 
       species == "Pigeon" ? factField.innerHTML = dinoFacts.dinoFact : factField.innerHTML = fact;
 
