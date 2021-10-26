@@ -21,13 +21,11 @@ function Dino(species, weight, height, diet, where, when, fact) {
     this.fact = fact
 }
 
-function FactSet(humanWeight, humanHeight, humanDiet, dinoLocation, dinoTimePeriod, dinoFact) {
-  this.humanWeight = humanWeight,
-  this.humanHeight = humanHeight, // needs conversion for feet AND inches
-  this.humanDiet = humanDiet
+function FactSet(dinoDiet, dinoLocation, dinoTimePeriod, dinoFact) {
+  this.dinoDiet = dinoDiet,
   this.dinoLocation = dinoLocation,
   this.dinoTimePeriod = dinoTimePeriod,
-  this.dinoFact = dinoFact
+  this.dinoFact = dinoFact,
   this.compareWeight = function () {
     console.log("compareWeight")
     //logic to compare human to dino weight
@@ -54,6 +52,7 @@ let dinoSet = dino.Dinos.map((e, i) => {
     newDino: new Dino(dino.Dinos[i].species, dino.Dinos[i].weight, dino.Dinos[i].height, dino.Dinos[i].diet, dino.Dinos[i].where, dino.Dinos[i].when, dino.Dinos[i].fact), //
   }
 })
+console.log("dinoSet", dinoSet)
 
 // Create Human Object -- with constructor or with object literal?
 function Human(name, feet, inches, weight, diet) {
@@ -82,7 +81,7 @@ function onClick(event) {
 
   // dynamically create dino/pigeon tiles 
   function createDinoTiles() {
-    for (let i = 0; i < dinoSet.length - 1; i++) {
+    for (let i = 0; i < dinoSet.length; i++) {
       let block = document.createElement("section");
       let list = document.createElement("ul")
       block.classList.add("grid-item");
@@ -129,24 +128,24 @@ function onClick(event) {
         case "Pigeon":
           speciesField.innerHTML = species;
           speciesImage.setAttribute("src", `../../images/pigeon.png`);
-          break;
       }
 
       let dinoFacts = new FactSet(
-        human.user.weight, 
-        human.user.feet, 
-        human.user.diet, 
+        dinoSet[i].newDino.diet,
         dinoSet[i].newDino.where,
         dinoSet[i].newDino.when,
         dinoSet[i].newDino.fact,
       );
 
+      console.log("dinoFacts", dinoFacts)
+
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
       let factArray = Object.values(dinoFacts)
-      let dinoFactsArray = factArray.splice(0, 3); // grab only dino facts and comparison methods
-      let fact = dinoFactsArray[randomNumber];
-      factField.innerHTML = fact;
+      console.log("factArray", factArray)
+      let fact = factArray[randomNumber];
+
+      species == "Pigeon" ? factField.innerHTML = dinoFacts.dinoFact : factField.innerHTML = fact;
 
       //need logic for pigeon tile
 
@@ -189,6 +188,9 @@ function onClick(event) {
 
   createDinoTiles();
   createHumanTile();
+
+  form.style = "display: none";
+  grid.style = "display: grid";
 }
 
 export { onClick }
