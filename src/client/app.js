@@ -107,7 +107,7 @@ function onClick(event) {
           break;
         case "Anklyosaurus":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/anklyosaurus.png`);
+          speciesImage.setAttribute("src", `../../images/anklyosaurus.png`); // test loading image with file loader here
           break;
         case "Brachiosaurus":
           speciesField.innerHTML = species;
