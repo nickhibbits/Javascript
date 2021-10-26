@@ -21,12 +21,14 @@ function Dino(species, weight, height, diet, where, when, fact) {
     this.fact = fact
 }
 
-function FactSet(dinoDiet, dinoLocation, dinoTimePeriod, dinoFact) {
+function FactSet(dinoWeight, dinoHeight, dinoDiet, dinoLocation, dinoTimePeriod, dinoFact) {
+  this.dinoWeight = dinoWeight
+  this.dinoHeight = dinoHeight
   this.dinoDiet = dinoDiet,
   this.dinoLocation = dinoLocation,
   this.dinoTimePeriod = dinoTimePeriod,
   this.dinoFact = dinoFact,
-  this.compareWeight = function () {
+  this.compareWeight = function (humanWeight) {
     console.log("compareWeight")
     //logic to compare human to dino weight
     //different conditionals for different return values, if user input value is greater/less than dino values
@@ -131,6 +133,8 @@ function onClick(event) {
       }
 
       let dinoFacts = new FactSet(
+        dinoSet[i].newDino.weight,
+        dinoSet[i].newDino.height,
         dinoSet[i].newDino.diet,
         `this dinosaur lived in ${dinoSet[i].newDino.where}`,
         dinoSet[i].newDino.when,
@@ -141,9 +145,11 @@ function onClick(event) {
 
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
-      let factArray = Object.values(dinoFacts)
+      let factArray = Object.values(dinoFacts);
       console.log("factArray", factArray)
-      let fact = factArray[randomNumber];
+      let filteredFactArray = factArray.splice(2, 7);
+      console.log("filteredFactArray", filteredFactArray);
+      let fact = filteredFactArray[randomNumber];
 
       species == "Pigeon" ? factField.innerHTML = dinoFacts.dinoFact : factField.innerHTML = fact;
 
