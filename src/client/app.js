@@ -132,9 +132,9 @@ function onClick(event) {
 
       let dinoFacts = new FactSet(
         dinoSet[i].newDino.diet,
-        dinoSet[i].newDino.where,
+        `this dinosaur lived in ${dinoSet[i].newDino.where}`,
         dinoSet[i].newDino.when,
-        dinoSet[i].newDino.fact,
+        `Fun fact: ${dinoSet[i].newDino.fact}`,
       );
 
       console.log("dinoFacts", dinoFacts)
