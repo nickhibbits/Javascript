@@ -30,17 +30,19 @@ function FactSet(dinoWeight, dinoHeight, dinoDiet, dinoLocation, dinoTimePeriod,
   this.dinoFact = dinoFact,
   this.compareWeight = function (humanWeight) {
     console.log("compareWeight")
-    //logic to compare human to dino weight
-    //different conditionals for different return values, if user input value is greater/less than dino values
-    return "this dino weighed x amount more than you"
-  }
-  this.compareHeight = function () {
+    if (humanWeight > this.dinoWeight) {
+      return  `This dino weighed ${humanWeight - this.dinoWeight} pounds less than you `
+    } else {
+     return `This dino weighed ${humanWeight - this.dinoWeight} pounds more than you `
+    }
+  },
+  this.compareHeight = function (humanHeight) {
     console.log("compareHeight")
     //logic to compare human to dino height
     //different conditionals for different return values, if user input value is greater/less than dino values
     return "this dino was x feet and inches taller than you"
-  }
-  this.compareDiet = function () {
+  },
+  this.compareDiet = function (humanDiet) {
     console.log("compareDiet")
     //logic to compare human to dino diet
     //different conditionals for different return values, if user input value is different/the same than dino values
@@ -94,9 +96,6 @@ function onClick(event) {
       let factField = document.createElement("li");
       let speciesImage = document.createElement("img")
 
-      // speciesField.setAttribute("id", `dino-species-${i}`);
-      // factField.setAttribute("id", `dino-fact-${i}`);
-
       let species = dinoSet[i].newDino.species
 
       switch (species) {
@@ -142,13 +141,24 @@ function onClick(event) {
         `Fun fact: ${dinoSet[i].newDino.fact}`,
       );
 
-      console.log("dinoFacts", dinoFacts)
+      console.log("dinoFacts", dinoFacts);
 
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
       let factArray = Object.values(dinoFacts);
       let filteredFacts = factArray.splice(2, 7);
       let fact = filteredFacts[randomNumber];
+
+      if (fact == dinoFacts.compareDiet) {
+        fact.innerHTML = dinoFacts.compareDiet();
+        console.log("compareDiet bb")
+      } else if (fact == dinoFacts.compareHeight) {
+        fact.innerHTML = dinoFacts.compareHeight();
+        console.log("compareHeight bb")
+      } else if (fact == dinoFacts.compareWeight) {
+        fact.innerHTML = dinoFacts.compareWeight(human.user.weight);
+        console.log("compareWeight bb")
+      }
 
       species == "Pigeon" ? factField.innerHTML = dinoFacts.dinoFact : factField.innerHTML = fact;
 
