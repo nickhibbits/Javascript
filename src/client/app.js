@@ -1,3 +1,11 @@
+import anklyosaurus from "../../images/anklyosaurus.png";
+import brachiosaurus from "../../images/brachiosaurus.png";
+import elasmosaurus from "../../images/elasmosaurus.png";
+import pigeon from "../../images/pigeon.png";
+import pteranodon from "../../images/pteranodon.png";
+import stegosaurus from "../../images/stegosaurus.png";
+import triceratops from "../../images/triceratops.png";
+import tyrannosaurus from "../../images/tyrannosaurus-rex.png";
 const dino = require("../../dino.json");
 
 console.log(dino.Dinos)
@@ -30,10 +38,14 @@ function FactSet(dinoWeight, dinoHeight, dinoDiet, dinoLocation, dinoTimePeriod,
   this.dinoFact = dinoFact,
   this.compareWeight = function (humanWeight) {
     console.log("compareWeight")
+
+    let message;
     if (humanWeight > this.dinoWeight) {
-      return  `This dino weighed ${humanWeight - this.dinoWeight} pounds less than you `
+      return `This dino weighed ${humanWeight - this.dinoWeight} pounds less than you `
+    } else if (humanWeight < this.dinoWeight) {
+      return `This dino weighed ${this.dinoWeight - humanWeight} pounds more than you ` 
     } else {
-     return `This dino weighed ${humanWeight - this.dinoWeight} pounds more than you `
+      return "You weigh the same as this dinosaur!" 
     }
   },
   this.compareHeight = function (humanHeight) {
@@ -61,7 +73,7 @@ console.log("dinoSet", dinoSet)
 // Create Human Object -- with constructor or with object literal?
 function Human(name, feet, inches, weight, diet) {
   this.name = name,
-    this.height = `${feet} ft, ${inches} in`,
+    this.height = `${feet}'${inches}`,
     this.weight = `${weight} lbs`,
     this.diet = diet
 }
@@ -101,35 +113,35 @@ function onClick(event) {
       switch (species) {
         case "Triceratops":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/triceratops.png`);
+          speciesImage.setAttribute("src", triceratops);
           break;
         case "Tyrannosaurus Rex":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/tyrannosaurus-rex.png`);
+          speciesImage.setAttribute("src", tyrannosaurus);
           break;
         case "Anklyosaurus":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/anklyosaurus.png`); // test loading image with file loader here
+          speciesImage.setAttribute("src", anklyosaurus); // test loading image with file loader here
           break;
         case "Brachiosaurus":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/brachiosaurus.png`);
+          speciesImage.setAttribute("src", brachiosaurus);
           break;
         case "Stegosaurus":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/stegosaurus.png`);
+          speciesImage.setAttribute("src", stegosaurus);
           break;
         case "Elasmosaurus":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/elasmosaurus.png`);
+          speciesImage.setAttribute("src", elasmosaurus);
           break;
         case "Pteranodon":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/pteranodon.png`);
+          speciesImage.setAttribute("src", pteranodon);
           break;
         case "Pigeon":
           speciesField.innerHTML = species;
-          speciesImage.setAttribute("src", `../../images/pigeon.png`);
+          speciesImage.setAttribute("src", pigeon);
       }
 
       let dinoFacts = new FactSet(
@@ -141,8 +153,6 @@ function onClick(event) {
         `Fun fact: ${dinoSet[i].newDino.fact}`,
       );
 
-      console.log("dinoFacts", dinoFacts);
-
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
       let factArray = Object.values(dinoFacts);
@@ -150,14 +160,13 @@ function onClick(event) {
       let fact = filteredFacts[randomNumber];
 
       if (fact == dinoFacts.compareDiet) {
-        fact.innerHTML = dinoFacts.compareDiet();
-        console.log("compareDiet bb")
+        factField.innerHTML = dinoFacts.compareDiet();
       } else if (fact == dinoFacts.compareHeight) {
-        fact.innerHTML = dinoFacts.compareHeight();
-        console.log("compareHeight bb")
+        factField.innerHTML = dinoFacts.compareHeight();
       } else if (fact == dinoFacts.compareWeight) {
-        fact.innerHTML = dinoFacts.compareWeight(human.user.weight);
-        console.log("compareWeight bb")
+        factField.innerHTML = dinoFacts.compareWeight(human.user.weight);
+        console.log("factField", factField)
+        console.log("compareWeight bb", dinoFacts.compareWeight(human.user.weight))
       }
 
       species == "Pigeon" ? factField.innerHTML = dinoFacts.dinoFact : factField.innerHTML = fact;
@@ -167,10 +176,10 @@ function onClick(event) {
       const documentFragment = document.createDocumentFragment();
       documentFragment.appendChild(list);
       list.appendChild(speciesField);
-      list.appendChild(speciesImage);
       list.appendChild(factField);
 
       block.appendChild(list);
+      block.appendChild(speciesImage);
       grid.appendChild(block);
     }
   }
