@@ -19,34 +19,36 @@ let weightField = document.querySelector("#weight");
 let dietField = document.querySelector("#diet")
 
 // Create Dino Constructor
-function Dino(species, weight, height, diet, where, when, fact) {
-  this.species = species,
-    this.weight = `${weight} lbs`,
-    this.height = `${height} feet`, // needs conversion for feet AND inches
+class Dino {
+  constructor(species, weight, height, diet, where, when, fact) {
+    this.species = species,
+      this.weight = weight
+    this.height = height // in inches
     this.diet = diet,
-    this.where = where,
-    this.when = when,
-    this.fact = fact,
-    this.compareWeight = function (humanWeight) {
-      if (humanWeight > this.weight) {
-        return `This dino weighed ${humanWeight - this.weight} pounds less than you `
-      } else if (humanWeight < this.weight) {
-        return `This dino weighed ${this.weight - humanWeight} pounds more than you `
-      } else {
-        return "You weigh the same as this dinosaur!"
+      this.where = where,
+      this.when = when,
+      this.fact = fact,
+      this.compareWeight = function (humanWeight) {
+        if (humanWeight > this.weight) {
+          return `This dino weighed ${humanWeight - this.weight} pounds less than you `
+        } else if (humanWeight < this.weight) {
+          return `This dino weighed ${this.weight - humanWeight} pounds more than you `
+        } else {
+          return "You weigh the same as this dinosaur!"
+        }
+      },
+      this.compareHeight = function (humanHeight) {
+        console.log("compareHeight")
+        //logic to compare human to dino diet
+        //different conditionals for different return values, if user input value is different/the same than dino values
+        return "compareHeight value"
       }
-    },
-    this.compareHeight = function (humanHeight) {
-      console.log("compareHeight")
+    this.compareDiet = function (humanDiet) {
+      console.log("compareDiet")
       //logic to compare human to dino diet
       //different conditionals for different return values, if user input value is different/the same than dino values
-      return "compareHeight value"
+      return "compareDiet value"
     }
-  this.compareDiet = function (humanDiet) {
-    console.log("compareDiet")
-    //logic to compare human to dino diet
-    //different conditionals for different return values, if user input value is different/the same than dino values
-    return "compareDiet value"
   }
 }
 
@@ -59,11 +61,13 @@ let dinoSet = dino.Dinos.map((e, i) => {
 console.log("dinoSet", dinoSet)
 
 // Create Human Object -- with constructor or with object literal?
-function Human(name, feet, inches, weight, diet) {
-  this.name = name,
-    this.height = `${feet}'${inches}`,
-    this.weight = `${weight} lbs`,
-    this.diet = diet
+class Human {
+  constructor(name, feet, inches, weight, diet) {
+    this.name = name;
+    this.height = feet * 12 + inches;
+    this.weight = `${weight} lbs`;
+    this.diet = diet;
+  }
 }
 
 function onClick(event) {
@@ -178,24 +182,19 @@ function onClick(event) {
   // dynamically create human tile
   function createHumanTile() {
     let humanBlock = document.createElement("section");
-    let humanList = document.createElement("ul");
     humanBlock.classList.add("grid-item");
     humanBlock.setAttribute("id", "human");
 
-    for (let i = 0; i < Object.keys(human.user).length; i++) {
-      let blockField = document.createElement("li");
-      blockField.setAttribute("id", `human-fact-${i}`);
+    let nameField = document.createElement("h2");
+    nameField.setAttribute("id", `human-name`);
+    let userName = human.user.name;
+    nameField.innerHTML = userName;
 
-      let userFacts = Object.values(human.user);
-      let userFact = userFacts[i];
-      blockField.innerHTML = userFact;
-
-      humanList.appendChild(blockField);
-    }
-
-    humanBlock.appendChild(humanList);
-    console.log("humanBlock", humanBlock);
+    humanBlock.appendChild(nameField);
     humanBlock.style.gridArea = "2 / 2 / 2 / 2"
+    humanBlock.style.display = "flex"
+    humanBlock.style.flexDirection = "column"
+    humanBlock.style.justifyContent = "center"
 
     grid.appendChild(humanBlock);
   }
