@@ -29,37 +29,40 @@ function Dino(species, weight, height, diet, where, when, fact) {
     this.fact = fact
 }
 
+// Add compare functions to dino prototype, delete factset for easier readability 
+
 function FactSet(dinoWeight, dinoHeight, dinoDiet, dinoLocation, dinoTimePeriod, dinoFact) {
   this.dinoWeight = dinoWeight
   this.dinoHeight = dinoHeight
   this.dinoDiet = dinoDiet,
-  this.dinoLocation = dinoLocation,
-  this.dinoTimePeriod = dinoTimePeriod,
-  this.dinoFact = dinoFact,
-  this.compareWeight = function (humanWeight) {
-    console.log("compareWeight")
+    this.dinoLocation = dinoLocation,
+    this.dinoTimePeriod = dinoTimePeriod,
+    this.dinoFact = dinoFact,
+    this.compareWeight = function (humanWeight) {
+      console.log("compareWeight")
 
-    let message;
-    if (humanWeight > this.dinoWeight) {
-      return `This dino weighed ${humanWeight - this.dinoWeight} pounds less than you `
-    } else if (humanWeight < this.dinoWeight) {
-      return `This dino weighed ${this.dinoWeight - humanWeight} pounds more than you ` 
-    } else {
-      return "You weigh the same as this dinosaur!" 
+      let message;
+      if (humanWeight > this.dinoWeight) {
+        return `This dino weighed ${humanWeight - this.dinoWeight} pounds less than you `
+      } else if (humanWeight < this.dinoWeight) {
+        return `This dino weighed ${this.dinoWeight - humanWeight} pounds more than you `
+      } else {
+        return "You weigh the same as this dinosaur!"
+      }
+    },
+    this.compareDiet = function (humanDiet) {
+      console.log("compareDiet")
+      //logic to compare human to dino diet
+      //different conditionals for different return values, if user input value is different/the same than dino values
+      return "this dino ate the same diet as you"
     }
-  },
-  this.compareHeight = function (humanHeight) {
-    console.log("compareHeight")
-    //logic to compare human to dino height
-    //different conditionals for different return values, if user input value is greater/less than dino values
-    return "this dino was x feet and inches taller than you"
-  },
-  this.compareDiet = function (humanDiet) {
-    console.log("compareDiet")
-    //logic to compare human to dino diet
-    //different conditionals for different return values, if user input value is different/the same than dino values
-    return "this dino ate the same diet as you"
-  }
+}
+
+FactSet.prototype.compareHeight = function (humanHeight) {
+  console.log("compareHeight")
+  //logic to compare human to dino height
+  //different conditionals for different return values, if user input value is greater/less than dino values
+  return "this dino was x feet and inches taller than you"
 }
 
 // Create Dino Objects
@@ -156,15 +159,24 @@ function onClick(event) {
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
       let factArray = Object.values(dinoFacts);
+      // console.log("factArray", factArray);
+
       let filteredFacts = factArray.splice(2, 7);
       let fact = filteredFacts[randomNumber];
 
+      // TODO
+      // - Create a variable called "whatAreWeComparing"
+      // - When deciding a random fact, set ^ equal to "height" or "weight" or "diet"
+      // if (whatAreWeComparing == "height") { dinoFacts.compareHeight() }
+
+      //TODO compare type, not  
       if (fact == dinoFacts.compareDiet) {
         factField.innerHTML = dinoFacts.compareDiet();
       } else if (fact == dinoFacts.compareHeight) {
         factField.innerHTML = dinoFacts.compareHeight();
       } else if (fact == dinoFacts.compareWeight) {
         factField.innerHTML = dinoFacts.compareWeight(human.user.weight);
+        // factField.innerHTML = fact(human.user.weight);
         console.log("factField", factField)
         console.log("compareWeight bb", dinoFacts.compareWeight(human.user.weight))
       }
@@ -184,29 +196,29 @@ function onClick(event) {
     }
   }
 
-  
+
   // dynamically create human tile
   function createHumanTile() {
     let humanBlock = document.createElement("section");
     let humanList = document.createElement("ul");
     humanBlock.classList.add("grid-item");
     humanBlock.setAttribute("id", "human");
-    
+
     for (let i = 0; i < Object.keys(human.user).length; i++) {
       let blockField = document.createElement("li");
       blockField.setAttribute("id", `human-fact-${i}`);
-      
+
       let userFacts = Object.values(human.user);
       let userFact = userFacts[i];
       blockField.innerHTML = userFact;
-      
+
       humanList.appendChild(blockField);
     }
-    
+
     humanBlock.appendChild(humanList);
     console.log("humanBlock", humanBlock);
     humanBlock.style.gridArea = "2 / 2 / 2 / 2"
-    
+
     grid.appendChild(humanBlock);
   }
 
