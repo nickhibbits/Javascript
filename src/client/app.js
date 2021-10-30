@@ -40,13 +40,13 @@ function Dino(species, weight, height, diet, where, when, fact) {
       console.log("compareHeight")
       //logic to compare human to dino diet
       //different conditionals for different return values, if user input value is different/the same than dino values
-      return "this dino ate the same diet as you"
+      return "compareHeight value"
     }
   this.compareDiet = function (humanDiet) {
     console.log("compareDiet")
     //logic to compare human to dino diet
     //different conditionals for different return values, if user input value is different/the same than dino values
-    return "this dino ate the same diet as you"
+    return "compareDiet value"
   }
 }
 
@@ -130,34 +130,37 @@ function onClick(event) {
         case "Pigeon":
           speciesField.innerHTML = species;
           speciesImage.setAttribute("src", pigeon);
-          factField.innerHTML = dinoSet[i].newDino.fact
       }
 
-      let randomNumber = Math.floor(Math.random() * 6) + 1;
+      let randomNumber = Math.floor(Math.random() * 6);
 
       let factKeys = Object.keys(dinoSet[i].newDino);
       let filteredFacts = factKeys.splice(1, 6);
       let whatAreWeComparing = filteredFacts[randomNumber];
 
-      switch (whatAreWeComparing) {
-        case "diet":
-          factField.innerHTML = dinoSet[i].newDino.compareDiet(human.user.diet);
-          break;
-        case "height":
-          factField.innerHTML = dinoSet[i].newDino.compareHeight(human.user.height);
-          break;
-        case "weight":
-          factField.innerHTML = dinoSet[i].newDino.compareWeight(human.user.weight);
-          break;
-        case "where":
-          factField.innerHTML = dinoSet[i].newDino.where;
-          break;
-        case "when":
-          factField.innerHTML = dinoSet[i].newDino.when;
-          break;
-        case "fact":
-          factField.innerHTML = dinoSet[i].newDino.fact;
-          break;
+      if (species == "Pigeon") {
+        factField.innerHTML = "All birds are living dinosaurs"
+      } else {
+        switch (whatAreWeComparing) {
+          case "diet":
+            factField.innerHTML = dinoSet[i].newDino.compareDiet(human.user.diet);
+            break;
+          case "height":
+            factField.innerHTML = dinoSet[i].newDino.compareHeight(human.user.height);
+            break;
+          case "weight":
+            factField.innerHTML = dinoSet[i].newDino.compareWeight(human.user.weight);
+            break;
+          case "where":
+            factField.innerHTML = `This dino lived in ${dinoSet[i].newDino.where}`;
+            break;
+          case "when":
+            factField.innerHTML = `This dino lived during the ${dinoSet[i].newDino.when} period`;
+            break;
+          case "fact":
+            factField.innerHTML = `Fun fact... ${dinoSet[i].newDino.fact}`;
+            break;
+        }
       }
 
       const documentFragment = document.createDocumentFragment();
