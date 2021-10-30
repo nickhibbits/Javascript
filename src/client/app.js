@@ -26,43 +26,28 @@ function Dino(species, weight, height, diet, where, when, fact) {
     this.diet = diet,
     this.where = where,
     this.when = when,
-    this.fact = fact
-}
-
-// Add compare functions to dino prototype, delete factset for easier readability 
-
-function FactSet(dinoWeight, dinoHeight, dinoDiet, dinoLocation, dinoTimePeriod, dinoFact) {
-  this.dinoWeight = dinoWeight
-  this.dinoHeight = dinoHeight
-  this.dinoDiet = dinoDiet,
-    this.dinoLocation = dinoLocation,
-    this.dinoTimePeriod = dinoTimePeriod,
-    this.dinoFact = dinoFact,
+    this.fact = fact,
     this.compareWeight = function (humanWeight) {
-      console.log("compareWeight")
-
-      let message;
-      if (humanWeight > this.dinoWeight) {
-        return `This dino weighed ${humanWeight - this.dinoWeight} pounds less than you `
-      } else if (humanWeight < this.dinoWeight) {
-        return `This dino weighed ${this.dinoWeight - humanWeight} pounds more than you `
+      if (humanWeight > this.weight) {
+        return `This dino weighed ${humanWeight - this.weight} pounds less than you `
+      } else if (humanWeight < this.weight) {
+        return `This dino weighed ${this.weight - humanWeight} pounds more than you `
       } else {
         return "You weigh the same as this dinosaur!"
       }
     },
-    this.compareDiet = function (humanDiet) {
-      console.log("compareDiet")
+    this.compareHeight = function (humanHeight) {
+      console.log("compareHeight")
       //logic to compare human to dino diet
       //different conditionals for different return values, if user input value is different/the same than dino values
       return "this dino ate the same diet as you"
     }
-}
-
-FactSet.prototype.compareHeight = function (humanHeight) {
-  console.log("compareHeight")
-  //logic to compare human to dino height
-  //different conditionals for different return values, if user input value is greater/less than dino values
-  return "this dino was x feet and inches taller than you"
+  this.compareDiet = function (humanDiet) {
+    console.log("compareDiet")
+    //logic to compare human to dino diet
+    //different conditionals for different return values, if user input value is different/the same than dino values
+    return "this dino ate the same diet as you"
+  }
 }
 
 // Create Dino Objects
@@ -145,45 +130,35 @@ function onClick(event) {
         case "Pigeon":
           speciesField.innerHTML = species;
           speciesImage.setAttribute("src", pigeon);
+          factField.innerHTML = dinoSet[i].newDino.fact
       }
-
-      let dinoFacts = new FactSet(
-        dinoSet[i].newDino.weight,
-        dinoSet[i].newDino.height,
-        dinoSet[i].newDino.diet,
-        `this dinosaur lived in ${dinoSet[i].newDino.where}`,
-        dinoSet[i].newDino.when,
-        `Fun fact: ${dinoSet[i].newDino.fact}`,
-      );
 
       let randomNumber = Math.floor(Math.random() * 6) + 1;
 
-      let factArray = Object.values(dinoFacts);
-      // console.log("factArray", factArray);
+      let factKeys = Object.keys(dinoSet[i].newDino);
+      let filteredFacts = factKeys.splice(1, 6);
+      let whatAreWeComparing = filteredFacts[randomNumber];
 
-      let filteredFacts = factArray.splice(2, 7);
-      let fact = filteredFacts[randomNumber];
-
-      // TODO
-      // - Create a variable called "whatAreWeComparing"
-      // - When deciding a random fact, set ^ equal to "height" or "weight" or "diet"
-      // if (whatAreWeComparing == "height") { dinoFacts.compareHeight() }
-
-      //TODO compare type, not  
-      if (fact == dinoFacts.compareDiet) {
-        factField.innerHTML = dinoFacts.compareDiet();
-      } else if (fact == dinoFacts.compareHeight) {
-        factField.innerHTML = dinoFacts.compareHeight();
-      } else if (fact == dinoFacts.compareWeight) {
-        factField.innerHTML = dinoFacts.compareWeight(human.user.weight);
-        // factField.innerHTML = fact(human.user.weight);
-        console.log("factField", factField)
-        console.log("compareWeight bb", dinoFacts.compareWeight(human.user.weight))
+      switch (whatAreWeComparing) {
+        case "diet":
+          factField.innerHTML = dinoSet[i].newDino.compareDiet(human.user.diet);
+          break;
+        case "height":
+          factField.innerHTML = dinoSet[i].newDino.compareHeight(human.user.height);
+          break;
+        case "weight":
+          factField.innerHTML = dinoSet[i].newDino.compareWeight(human.user.weight);
+          break;
+        case "where":
+          factField.innerHTML = dinoSet[i].newDino.where;
+          break;
+        case "when":
+          factField.innerHTML = dinoSet[i].newDino.when;
+          break;
+        case "fact":
+          factField.innerHTML = dinoSet[i].newDino.fact;
+          break;
       }
-
-      species == "Pigeon" ? factField.innerHTML = dinoFacts.dinoFact : factField.innerHTML = fact;
-
-      //need logic for pigeon tile
 
       const documentFragment = document.createDocumentFragment();
       documentFragment.appendChild(list);
