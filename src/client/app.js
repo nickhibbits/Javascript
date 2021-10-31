@@ -8,8 +8,6 @@ import triceratops from "../../images/triceratops.png";
 import tyrannosaurus from "../../images/tyrannosaurus-rex.png";
 const dino = require("../../dino.json");
 
-console.log(dino.Dinos)
-
 let form = document.querySelector("#dino-compare");
 let grid = document.querySelector("#grid");
 let nameField = document.querySelector("#name");
@@ -66,7 +64,6 @@ let dinoSet = dino.Dinos.map((e, i) => {
     newDino: new Dino(dino.Dinos[i].species, dino.Dinos[i].weight, dino.Dinos[i].height, dino.Dinos[i].diet, dino.Dinos[i].where, dino.Dinos[i].when, dino.Dinos[i].fact), //
   }
 })
-console.log("dinoSet", dinoSet)
 
 // Create Human Object -- with constructor or with object literal?
 class Human {
@@ -93,10 +90,6 @@ function onClick(event) {
       )
     }
   }())
-
-  console.log("human height", human.user.height)
-
-  console.log("human", human)
 
   // dynamically create dino/pigeon tiles 
   function createDinoTiles() {
@@ -201,10 +194,7 @@ function onClick(event) {
     nameField.innerHTML = userName;
 
     humanBlock.appendChild(nameField);
-    humanBlock.style.gridArea = "2 / 2 / 2 / 2"
-    humanBlock.style.display = "flex"
-    humanBlock.style.flexDirection = "column"
-    humanBlock.style.justifyContent = "center"
+    humanBlock.style.cssText = "grid-area: 2 / 2 / 2 / 2; display: flex; flex-direction: column; justify-content: center;"
 
     grid.appendChild(humanBlock);
   }
