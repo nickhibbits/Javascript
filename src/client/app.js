@@ -21,34 +21,42 @@ let dietField = document.querySelector("#diet")
 // Create Dino Constructor
 class Dino {
   constructor(species, weight, height, diet, where, when, fact) {
-    this.species = species,
-      this.weight = weight
-    this.height = height // in inches
-    this.diet = diet,
-      this.where = where,
-      this.when = when,
-      this.fact = fact,
-      this.compareWeight = function (humanWeight) {
-        if (humanWeight > this.weight) {
-          return `This dino weighed ${humanWeight - this.weight} pounds less than you `
-        } else if (humanWeight < this.weight) {
-          return `This dino weighed ${this.weight - humanWeight} pounds more than you `
-        } else {
-          return "You weigh the same as this dinosaur!"
-        }
-      },
-      this.compareHeight = function (humanHeight) {
-        console.log("compareHeight")
-        //logic to compare human to dino diet
-        //different conditionals for different return values, if user input value is different/the same than dino values
-        return "compareHeight value"
+    this.species = species;
+    this.weight = weight;
+    this.height = height; // in inches
+    this.diet = diet;
+    this.where = where;
+    this.when = when;
+    this.fact = fact;
+    this.compareWeight = function (humanWeight) {
+      if (humanWeight > this.weight) {
+        return `This dino weighed ${humanWeight - this.weight} pounds less than you `
+      } else if (humanWeight < this.weight) {
+        return `This dino weighed ${this.weight - humanWeight} pounds more than you `
+      } else if (humanWeight == this.weight) {
+        return "You weigh the same as this dinosaur!"
       }
+    };
+    this.compareHeight = function (humanHeight) {
+      if (humanHeight > this.height) {
+        return `This dino was ${Math.round(10 * (humanHeight - this.height) / 12) / 10} feet shorter than you `
+      } else if (humanHeight < this.height) {
+        return `This dino was ${Math.round(10 * (this.height - humanHeight) / 12) / 10} feet taller than you `
+      } else if (humanHeight == this.height) {
+        return "You weigh the same as this dinosaur!"
+      }
+    };
     this.compareDiet = function (humanDiet) {
-      console.log("compareDiet")
-      //logic to compare human to dino diet
-      //different conditionals for different return values, if user input value is different/the same than dino values
-      return "compareDiet value"
-    }
+      if (humanDiet == "Herbavor" && this.diet == "herbavor") {
+        return "This dino had a strictly plant-based diet, just like you!"
+      } else if (humanDiet == "Carnivore" && this.diet == "carnivore") {
+        return "This dino ate meat, and ONLY meat, just like you!"
+      } else if (humanDiet == "Omnivor" && this.diet == "omnivor") {
+        return "Not known to discriminate, this dino ate both meat and plants, just like you!"
+      } else if (humanDiet !== this.diet) {
+        return "You had a different diet than this dino!"
+      }
+    };
   }
 }
 
@@ -65,7 +73,7 @@ class Human {
   constructor(name, feet, inches, weight, diet) {
     this.name = name;
     this.height = feet * 12 + inches;
-    this.weight = `${weight} lbs`;
+    this.weight = weight;
     this.diet = diet;
   }
 }
@@ -78,13 +86,15 @@ function onClick(event) {
     return {
       user: new Human(
         nameField.value,
-        feetField.value,
-        inchesField.value,
-        weightField.value,
-        dietField.value
+        parseInt(feetField.value),
+        parseInt(inchesField.value),
+        parseInt(weightField.value),
+        dietField.value,
       )
     }
   }())
+
+  console.log("human height", human.user.height)
 
   console.log("human", human)
 
