@@ -2,7 +2,7 @@
 
 ## Description
 
-This app asks the user for facts about themselves, then compares them against indivdual fact-sets across 9 different dinosaurs. With each refresh, the species name, species pic, and a new (randomly selected) fact about each dino is displayed. Some of these facts are about the dinosaur itself, and some come as the result of methods that compare facts about the dinosaur to facts input by the user (namely height, weight, and diet).
+This app asks the user for facts about themselves, then compares them against indivdual fact-sets across 9 different dinosaurs. With each refresh, the species name, species pic, and a new, randomly selected, fact about each dinosaur is displayed. Some of these facts are about the dinosaur itself, and some come as the result of methods that compare facts about the dinosaur to facts input by the user (namely height, weight, and diet).
 
 ## Instructions
 
