@@ -1,3 +1,9 @@
+// TODOs for extra shine...
+// Validate the form data to ensure the data is acceptable and complete. 
+// Style the container holding the species and fact list items in each dino grid
+// Randomize the order of the tiles while keeping the human in the middle.
+// Create a hover state on the tiles that displays the rest of the species statistics. 
+
 import anklyosaurus from "../../images/anklyosaurus.png";
 import brachiosaurus from "../../images/brachiosaurus.png";
 import elasmosaurus from "../../images/elasmosaurus.png";
